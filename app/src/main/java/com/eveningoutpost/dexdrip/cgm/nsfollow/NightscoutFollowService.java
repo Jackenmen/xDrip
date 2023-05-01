@@ -128,8 +128,8 @@ public class NightscoutFollowService extends ForegroundService {
         final BgReading lastBg = BgReading.lastNoSenssor();
         final long last = lastBg != null ? lastBg.timestamp : 0;
 
-        final long grace = Constants.SECOND_IN_MS * 10;
-        final long next = Anticipate.next(JoH.tsl(), last, SAMPLE_PERIOD, grace) + grace;
+        final long grace = Constants.SECOND_IN_MS * 20;
+        final long next = Anticipate.next(JoH.tsl(), last, SAMPLE_PERIOD, grace);
         wakeup_time = next;
         UserError.Log.d(TAG, "Anticipate next: " + JoH.dateTimeText(next) + "  last: " + JoH.dateTimeText(last));
 

@@ -21,15 +21,15 @@ public class Anticipate {
         final long since = now - last;
         if (since <= (grace * 2)) {
             // recent reading already
-            return last + period - grace;
+            return last + period;
         }
 
         // Find time outside period schedule where we are now.
         final long modulus = (last - now) % period;
         long nextMin;
         // Try to wake up on next expected
-        if (modulus < -grace) {
-            nextMin = (now + modulus) + period - grace;
+        if (modulus < -(grace*3)) {
+            nextMin = (now + modulus) + period;
         } else {
             nextMin = (now + modulus);
         }

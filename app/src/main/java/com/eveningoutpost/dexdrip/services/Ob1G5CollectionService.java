@@ -541,8 +541,7 @@ public class Ob1G5CollectionService extends G5BaseService {
                 historicalTransmitterMAC = PersistentStore.getString(OB1G5_MACSTORE + transmitterID); // "" if unset
 
                 ScanFilter filter;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && historicalTransmitterMAC.length() > 5
-                        && Build.VERSION.SDK_INT < 29) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && historicalTransmitterMAC.length() > 5) {
                     filter = new ScanFilter.Builder()
                             .setDeviceAddress(historicalTransmitterMAC)
                             .build();
@@ -2108,7 +2107,7 @@ public class Ob1G5CollectionService extends G5BaseService {
         }
         final String sensorCode = getCurrentSensorCode();
         if (sensorCode != null) {
-            if (usingG6()) {
+            if (usingG6() && FirmwareCapability.isTransmitterG6(getTransmitterID())) {
                 l.add(new StatusItem("Calibration Code", sensorCode));
             }
         }

@@ -8,11 +8,10 @@ on:
       build_branch:
         description: "Branch to build from"
         required: true
-        default: modify_grace_behavior
+        default: master
         type: choice
         options:
           - master
-          - modify_grace_behavior
       perform_release:
         description: "Generate a release with built artifacts"
         required: false
@@ -28,7 +27,7 @@ jobs:
 
     steps:
     - name: Checkout the repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         ref: ${{ inputs.build_branch }}
 

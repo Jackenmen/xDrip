@@ -8,10 +8,11 @@ on:
       build_branch:
         description: "Branch to build from"
         required: true
-        default: master
+        default: jack_patches
         type: choice
         options:
           - master
+          - jack_patches
       perform_release:
         description: "Generate a release with built artifacts"
         required: false

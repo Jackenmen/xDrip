@@ -76,6 +76,8 @@ jobs:
       contents: write
     if: ${{ inputs.perform_release }}
     runs-on: ubuntu-latest
+    env:
+      APK_NAME: app-prod-release.apk
     steps:
       - name: Download release artifacts
         uses: actions/download-artifact@v3
@@ -85,10 +87,15 @@ jobs:
       - name: Get version name.
         id: version_info
         run: |
-          APK_NAME=app-prod-release.apk
           APKANALYZER="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/apkanalyzer"
           echo "VERSION_CODE=$($APKANALYZER manifest version-code $APK_NAME)" >> $GITHUB_OUTPUT
           echo "VERSION_NAME=$($APKANALYZER manifest version-name $APK_NAME)" >> $GITHUB_OUTPUT
+
+      - name: Update artifact name.
+        env:
+          VERSION_NAME: ${{ steps.version_info.outputs.VERSION_NAME }}
+        run: |
+          mv "$APK_NAME" "xDrip-plus-${VERSION_NAME}.apk"
 
       - name: Display structure of downloaded files
         uses: softprops/action-gh-release@v1

@@ -14,6 +14,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.eveningoutpost.dexdrip.GcmActivity;
 import com.eveningoutpost.dexdrip.Home;
+import com.eveningoutpost.dexdrip.alert.Poller;
 import com.eveningoutpost.dexdrip.models.BgReading;
 import com.eveningoutpost.dexdrip.models.JoH;
 import com.eveningoutpost.dexdrip.models.UserError;
@@ -165,7 +166,7 @@ public class BgSendQueue extends Model {
                 JoH.startService(SyncService.class);
             }
 
-
+            Poller.reading();
         } finally {
             JoH.releaseWakeLock(wakeLock);
         }

@@ -38,7 +38,7 @@ public class SensorExpiry extends BaseAlert {
     private static final Persist.Long alerted = new Persist.Long("PREF_SENSOR_EXPIRE_ALERTED");
 
     public SensorExpiry() {
-        super("Sensor Expiry", When.ChargeChange, When.ScreenOn);
+        super("Sensor Expiry", When.Reading, When.ChargeChange, When.ScreenOn);
     }
 
     @Override
